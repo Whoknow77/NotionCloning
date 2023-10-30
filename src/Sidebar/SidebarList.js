@@ -1,4 +1,4 @@
-import { push } from '../router/router.js';
+import { push } from "../router/router.js";
 
 export default function SidebarList({
   $target,
@@ -7,8 +7,8 @@ export default function SidebarList({
   addDocument,
 }) {
   this.state = initialState;
-  const $sidebartitle = document.createElement('div');
-  $sidebartitle.className = 'sidebar__content';
+  const $sidebartitle = document.createElement("div");
+  $sidebartitle.className = "sidebar__content";
   $target.appendChild($sidebartitle);
 
   const renderTree = (documents) => `
@@ -21,56 +21,56 @@ export default function SidebarList({
             <button class="toggle">
               ${
                 doc.documents && doc.documents.length > 0
-                  ? `<img src="/public/assets/img/open.svg" alt="페이지 토글 열기 이미지"/>`
-                  : `<img src="/public/assets/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
+                  ? `<img src="../../public/assets/img/open.svg" alt="페이지 토글 열기 이미지"/>`
+                  : `<img src="../../public/assets/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
               }
             </button>
             <button class="doc">
-              <img src="/public/assets/img/doc.svg" alt="페이지 이미지" />
+              <img src="../../public/assets/img/doc.svg" alt="페이지 이미지" />
             </button>
             <span class="text">${doc.title}</span>
             <button class="delete">
-              <img src="/public/assets/img/delete.svg" alt="페이지 삭제 이미지" />
+              <img src="../../public/assets/img/delete.svg" alt="페이지 삭제 이미지" />
             </button>
             <button class="add">
-              <img src="/public/assets/img/add.svg" alt="페이지 추가 이미지" />
+              <img src="../../public/assets/img/add.svg" alt="페이지 추가 이미지" />
             </button>
           </div>
           ${
             doc.documents && doc.documents.length > 0
               ? renderTree(doc.documents)
-              : ''
+              : ""
           }
         </li>
-      `,
+      `
       )
-      .join('')}
+      .join("")}
   </ul>
 `;
 
-  $sidebartitle.addEventListener('click', (e) => {
-    const $button = e.target.closest('button');
-    const $li = e.target.closest('li');
+  $sidebartitle.addEventListener("click", (e) => {
+    const $button = e.target.closest("button");
+    const $li = e.target.closest("li");
     // 버튼 선택
     if ($li && $button && $button.className) {
       const { id } = $li.dataset;
       switch ($button.className) {
-        case 'toggle':
-          if ($li.querySelector('ul')) {
-            const $ul = $li.querySelector('ul');
-            $ul.classList.toggle('hidden');
+        case "toggle":
+          if ($li.querySelector("ul")) {
+            const $ul = $li.querySelector("ul");
+            $ul.classList.toggle("hidden");
 
-            if ($ul.className === 'hidden') {
-              $button.innerHTML = `<img src="/public/assets/img/close.svg" alt="페이지 토글 닫기 이미지"/>`;
+            if ($ul.className === "hidden") {
+              $button.innerHTML = `<img src="../../public/assets/img/close.svg" alt="페이지 토글 닫기 이미지"/>`;
             } else {
-              $button.innerHTML = `<img src="/public/assets/img/open.svg" alt="페이지 토글 열기 이미지"/>`;
+              $button.innerHTML = `<img src="../../public/assets/img/open.svg" alt="페이지 토글 열기 이미지"/>`;
             }
           }
           break;
-        case 'delete':
+        case "delete":
           delDocument(id);
           break;
-        case 'add':
+        case "add":
           addDocument(id);
           break;
         default:
