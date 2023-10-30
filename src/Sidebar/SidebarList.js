@@ -21,8 +21,8 @@ export default function SidebarList({
             <button class="toggle">
               ${
                 doc.documents && doc.documents.length > 0
-                  ? `<img src="../../public/assets/img/open.svg" alt="페이지 토글 열기 이미지"/>`
-                  : `<img src="../../public/assets/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
+                  ? `<img src="../img/open.svg" alt="페이지 토글 열기 이미지"/>`
+                  : `<img src="../img/close.svg" alt="페이지 토글 닫기 이미지"/>`
               }
             </button>
             <button class="doc">
