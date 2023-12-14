@@ -1,21 +1,21 @@
-export const API_END_POINT = 'https://kdt-frontend.programmers.co.kr/documents';
+import { API_KEY, X_USER_NAME } from "../../config.js";
 
 export const request = async (url, options = {}) => {
-  try {
-    const res = await fetch(`${API_END_POINT}${url}`, {
-      ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        'x-username': 'hunoh',
-      },
-    });
+	try {
+		const res = await fetch(`${API_KEY}${url}`, {
+			...options,
+			headers: {
+				"Content-Type": "application/json",
+				"x-username": X_USER_NAME,
+			},
+		});
 
-    if (res.ok) {
-      // await 빼먹으면 promise 리턴
-      return await res.json();
-    }
-    throw new Error('API 처리중 뭔가 이상합니다.');
-  } catch (e) {
-    console.log(e.message);
-  }
+		if (res.ok) {
+			// await 빼먹으면 promise 리턴
+			return await res.json();
+		}
+		throw new Error("API 처리중 뭔가 이상합니다.");
+	} catch (e) {
+		console.log(e.message);
+	}
 };

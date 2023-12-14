@@ -56,5 +56,6 @@ package-lock.json
 .eslintrc.json
 style.scss
 style.css.map
+.env
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode
