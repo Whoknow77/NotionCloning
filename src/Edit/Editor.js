@@ -1,54 +1,55 @@
-import revertCursor from '../utils/revertCursor.js';
-
 export default function Editor({
-  $target,
-  initialState = {
-    title: '',
-    content: '',
-  },
-  onEditing,
+	$target,
+	initialState = {
+		title: "",
+		content: "",
+	},
+	onEditing,
 }) {
-  const $editor = document.createElement('div');
-  $editor.className = 'editor';
-  $editor.innerHTML = `
+	const $editor = document.createElement("div");
+	$editor.className = "editor";
+	$editor.innerHTML = `
   <input type="text" name="title" placeholder="제목을 입력해주세요."/>
-  <div name="content" contentEditable="true"></div>
+  <textarea name="content" class="content"></textarea>
   `;
-  this.state = initialState;
-  $target.appendChild($editor);
+	this.state = initialState;
+	$target.appendChild($editor);
 
-  this.setState = async (nextState) => {
-    this.state = nextState;
-    this.render();
-  };
+	this.setState = async (nextState) => {
+		this.state = nextState;
+		this.render();
+	};
 
-  this.render = async () => {
-    $editor.querySelector('[name=title]').value =
-      this.state.title === '새 폴더' ? '' : this.state.title;
-    $editor.querySelector('[name=content]').innerHTML = this.state.content;
-  };
+	this.render = () => {
+		console.log(this.state);
+		$editor.querySelector("[name=title]").value =
+			this.state.title === "새 폴더" ? "" : this.state.title;
+		$editor.querySelector("[name=content]").value = this.state.content;
+	};
 
-  $editor.querySelector('[name=title]').addEventListener('keyup', (e) => {
-    const nextState = {
-      ...this.state,
-      title: e.target.value,
-    };
-    this.setState(nextState);
-    onEditing(this.state);
-  });
+	// 제목 입력
 
-  const $content = $editor.querySelector('[name=content]');
+	const $title = $editor.querySelector("[name=title]");
+	$title.addEventListener("keyup", (e) => {
+		const nextState = {
+			...this.state,
+			title: e.target.value,
+		};
+		this.setState(nextState);
+		onEditing(nextState);
+	});
 
-  $content.addEventListener('input', (e) => {
-    const nextState = {
-      ...this.state,
-      content: e.target.innerHTML,
-    };
-    this.setState(nextState);
+	// 내용 입력
+	const $content = $editor.querySelector("[name=content]");
+	$content.addEventListener("keyup", (e) => {
+		const nextState = {
+			...this.state,
+			content: e.target.value,
+		};
+		this.setState(nextState);
 
-    revertCursor($content);
-    onEditing(this.state);
-  });
+		onEditing(nextState);
+	});
 
-  this.render();
+	this.render();
 }
