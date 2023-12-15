@@ -1,25 +1,29 @@
-export default function SidebarHeader({ $target, addDocument }) {
-  const $sidebarHeader = document.createElement("div");
-  $sidebarHeader.className = "sidebar__header";
+export default function SidebarHeader({ $target, addDocument, goHome }) {
+	const $sidebarHeader = document.createElement("div");
+	$sidebarHeader.className = "sidebar__header";
 
-  $target.appendChild($sidebarHeader);
-  this.render = () => {
-    $sidebarHeader.innerHTML = `
-        <span class="sidebar__header__title">
+	$target.appendChild($sidebarHeader);
+	this.render = () => {
+		$sidebarHeader.innerHTML = `
+        <button class="sidebar__header__title">
             훈오의 Notion
-        </span>
+        </button>
         <button class="add">
           <img src="/src/img/add.svg" alt="페이지 추가 이미지" />
         </button>
     `;
-  };
+	};
 
-  $sidebarHeader.addEventListener("click", (e) => {
-    console.log(e.target);
-    if (e.target.classList.contains("add") || e.target.tagName === "IMG") {
-      addDocument();
-    }
-  });
+	$sidebarHeader.addEventListener("click", (e) => {
+		console.log(e.target);
+		if (e.target.classList.contains("add") || e.target.tagName === "IMG") {
+			addDocument();
+		}
+		// 홈 버튼
+		else {
+			goHome();
+		}
+	});
 
-  this.render();
+	this.render();
 }

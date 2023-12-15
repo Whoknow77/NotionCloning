@@ -21,7 +21,6 @@ export default function Editor({
 	};
 
 	this.render = () => {
-		console.log(this.state);
 		$editor.querySelector("[name=title]").value =
 			this.state.title === "새 폴더" ? "" : this.state.title;
 		$editor.querySelector("[name=content]").value = this.state.content;

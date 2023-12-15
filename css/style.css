@@ -32,6 +32,7 @@
 	align-items: center;
 	width: 100%;
 	font-size: 15px;
+	color: rgba(55, 53, 47, 0.5);
 }
 #app .sidebar__header__btn {
 	font-size: 12px;
