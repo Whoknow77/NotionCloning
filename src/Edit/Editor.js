@@ -9,8 +9,8 @@ export default function Editor({
 	const $editor = document.createElement("div");
 	$editor.className = "editor";
 	$editor.innerHTML = `
-  <input type="text" name="title" placeholder="제목을 입력해주세요."/>
-  <textarea name="content" class="content"></textarea>
+	<input type="text" name="title" placeholder="제목을 입력해주세요."/>
+	<textarea name="content" class="content"></textarea>
   `;
 	this.state = initialState;
 	$target.appendChild($editor);
