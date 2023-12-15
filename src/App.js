@@ -20,7 +20,7 @@ export default function App({ $target }) {
 				method: "PUT",
 				body: JSON.stringify(document),
 			});
-			this.render(); // 디바운싱or쓰로틀링 적용해야함
+			sidebar.setState(); // 디바운싱or쓰로틀링 적용해야함
 		},
 	});
 
