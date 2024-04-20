@@ -32,12 +32,18 @@ export default function Editor({
 
 	const $title = $editor.querySelector("[name=title]");
 	$title.addEventListener("keyup", (e) => {
-		const nextState = {
-			...this.state,
-			title: e.target.value,
-		};
-		this.setState(nextState);
-		onEditing(nextState);
+		// 엔터시 본문으로 커서 이동
+		if (e.key === "Enter") {
+			$editor.querySelector("[name=content]").focus();
+			$editor.querySelector("[name=content]").setSelectionRange(0, 0);
+		} else {
+			const nextState = {
+				...this.state,
+				title: e.target.value,
+			};
+			this.setState(nextState);
+			onEditing(nextState);
+		}
 	});
 
 	// 디바운싱을 적용한 input change함수
