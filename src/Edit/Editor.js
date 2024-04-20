@@ -40,7 +40,7 @@ export default function Editor({
 		onEditing(nextState);
 	});
 
-	// 디바운싱을 적용한 input change함ㅅ
+	// 디바운싱을 적용한 input change함수
 	const handleContent = (e) => {
 		const nextState = {
 			...this.state,

@@ -18,7 +18,10 @@ export default function Sidebar({ $target }) {
 				method: "POST",
 				body: JSON.stringify(document),
 			});
-			this.setState({ ...this.state, createdDocument });
+			if (createdDocument) {
+				push(`/posts/${createdDocument.id}`);
+				this.setState({ ...this.state, createdDocument });
+			}
 		},
 		goHome: async () => {
 			push("/");
