@@ -89,6 +89,7 @@
 	justify-content: center;
 }
 #app .editpage .editor {
+	margin-left: 270px;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
