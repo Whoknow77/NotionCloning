@@ -15,7 +15,6 @@ export default function SidebarHeader({ $target, addDocument, goHome }) {
 	};
 
 	$sidebarHeader.addEventListener("click", (e) => {
-		console.log(e.target);
 		if (e.target.classList.contains("add") || e.target.tagName === "IMG") {
 			addDocument();
 		}

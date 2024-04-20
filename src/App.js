@@ -31,6 +31,7 @@ export default function App({ $target }) {
 			const [, , postId] = pathname.split("/");
 			editpage.setState(`${postId}`);
 		} else {
+			editpage.setState(null);
 			// 에디터 페이지 가리기
 		}
 	};
