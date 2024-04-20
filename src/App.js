@@ -31,8 +31,8 @@ export default function App({ $target }) {
 			const [, , postId] = pathname.split("/");
 			editpage.setState(`${postId}`);
 		} else {
-			editpage.setState(null);
 			// 에디터 페이지 가리기
+			editpage.setState(null);
 		}
 	};
 	// 뒤,앞으로 가기

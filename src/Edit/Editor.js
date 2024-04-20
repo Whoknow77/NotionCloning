@@ -1,3 +1,5 @@
+import { debounce } from "../utils/debounce.js";
+
 export default function Editor({
 	$target,
 	initialState = {
@@ -38,16 +40,22 @@ export default function Editor({
 		onEditing(nextState);
 	});
 
-	// 내용 입력
-	const $content = $editor.querySelector("[name=content]");
-	$content.addEventListener("keyup", (e) => {
+	// 디바운싱을 적용한 input change함ㅅ
+	const handleContent = (e) => {
 		const nextState = {
 			...this.state,
 			content: e.target.value,
 		};
 		this.setState(nextState);
+		debounce(() => {
+			onEditing(nextState);
+		});
+	};
 
-		onEditing(nextState);
+	// 내용 입력
+	const $content = $editor.querySelector("[name=content]");
+	$content.addEventListener("keyup", (e) => {
+		handleContent(e);
 	});
 
 	this.render();
