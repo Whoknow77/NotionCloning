@@ -6,10 +6,9 @@ import { push } from "../router/router.js";
 export default function Sidebar({ $target }) {
 	const $sidebar = document.createElement("section");
 	$sidebar.className = "sidebar";
-
 	new SidebarHeader({
 		$target: $sidebar,
-		addDocument: async () => {
+		createDocument: async () => {
 			const document = {
 				title: "새 폴더",
 				parent: null,
@@ -20,10 +19,9 @@ export default function Sidebar({ $target }) {
 			});
 			if (createdDocument) {
 				push(`/posts/${createdDocument.id}`);
-				this.setState({ ...this.state, createdDocument });
 			}
 		},
-		goHome: async () => {
+		goHome: () => {
 			push("/");
 		},
 	});
@@ -31,34 +29,31 @@ export default function Sidebar({ $target }) {
 	const sidebarList = new SidebarList({
 		$target: $sidebar,
 		initialState: [],
+		addDocument: async (docId) => {
+			const document = {
+				title: "새 폴더",
+				parent: docId,
+			};
+
+			const addedDocuments = await request("", {
+				method: "POST",
+				body: JSON.stringify(document),
+			});
+
+			if (addedDocuments) {
+				push(`/posts/${addedDocuments.docId}`);
+				this.setState();
+			}
+		},
+
 		delDocument: async (docId) => {
 			const deletedDocuments = await request(`/${docId}`, {
 				method: "DELETE",
 			});
-			// 삭제가 제대로 된 경우
 			if (deletedDocuments) {
 				this.setState();
-			}
-			// 삭제가 제대로 되지 않은 경우
-			else {
+			} else {
 				console.log("삭제가 제대로 되지 않았습니다.");
-			}
-		},
-
-		addDocument: async (id) => {
-			const document = {
-				title: "새 폴더",
-				parent: id,
-			};
-			const updatedDocuments = await request(``, {
-				method: "POST",
-				body: JSON.stringify(document),
-			});
-			// 추가가 제대로 된 경우
-			if (updatedDocuments) {
-				// 새로 들어온 디렉토리 편집화면
-				push(`/posts/${updatedDocuments.id}`);
-				this.setState();
 			}
 		},
 	});
@@ -66,7 +61,6 @@ export default function Sidebar({ $target }) {
 	this.setState = async () => {
 		const documents = await request("");
 		sidebarList.setState(documents);
-		this.render();
 	};
 
 	this.render = async () => {

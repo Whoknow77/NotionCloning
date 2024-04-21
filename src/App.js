@@ -23,7 +23,7 @@ export default function App({ $target }) {
 				method: "PUT",
 				body: JSON.stringify(document),
 			});
-			sidebar.setState(); // 디바운싱or쓰로틀링 적용해야함
+			sidebar.setState();
 		},
 	});
 
@@ -35,12 +35,11 @@ export default function App({ $target }) {
 			editpage.setState(`${postId}`);
 			home.setState(false);
 		} else {
-			// 에디터 페이지 가리기
-			home.setState(true);
 			editpage.setState(null);
+			home.setState(true);
 		}
 	};
-	// 뒤,앞으로 가기
+
 	window.addEventListener("popstate", async () => {
 		this.render();
 	});
