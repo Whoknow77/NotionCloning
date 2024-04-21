@@ -1,8 +1,8 @@
 export default function SidebarHeader({ $target, createDocument, goHome }) {
-	const $sidebarHeader = document.createElement("div");
-	$sidebarHeader.className = "sidebar__header";
+	const $sidebarHeader = document.createElement("div")
+	$sidebarHeader.className = "sidebar__header"
 
-	$target.appendChild($sidebarHeader);
+	$target.appendChild($sidebarHeader)
 	this.render = () => {
 		$sidebarHeader.innerHTML = `
         <button class="sidebar__header__title">
@@ -11,16 +11,16 @@ export default function SidebarHeader({ $target, createDocument, goHome }) {
         <button class="sidebar__header__create-button">
           <img class="create-button__img" src="/src/img/add.svg" alt="페이지 생성 이미지" />
         </button>
-    `;
-	};
+    `
+	}
 
 	$sidebarHeader.addEventListener("click", (e) => {
 		if (e.target.matches(".create-button__img")) {
-			createDocument();
+			createDocument()
 		} else {
-			goHome();
+			goHome()
 		}
-	});
+	})
 
-	this.render();
+	this.render()
 }

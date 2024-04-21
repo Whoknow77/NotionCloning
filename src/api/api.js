@@ -1,4 +1,4 @@
-import { API_KEY, X_USER_NAME } from "../../config.js";
+import { API_KEY, X_USER_NAME } from "../../config.js"
 
 export const request = async (url, options = {}) => {
 	try {
@@ -8,14 +8,14 @@ export const request = async (url, options = {}) => {
 				"Content-Type": "application/json",
 				"x-username": X_USER_NAME,
 			},
-		});
+		})
 
 		if (res.ok) {
 			// await 빼먹으면 promise 리턴
-			return await res.json();
+			return await res.json()
 		}
-		throw new Error("API 처리중 뭔가 이상합니다.");
+		throw new Error("API 처리중 뭔가 이상합니다.")
 	} catch (e) {
-		console.log(e.message);
+		console.log(e.message)
 	}
-};
+}
