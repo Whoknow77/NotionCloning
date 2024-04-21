@@ -3,7 +3,11 @@ import Editor from "./Editor.js"
 import {request} from "../api/api.js"
 import {INITIAL_DOCUMENT} from "../constants/initialDocument.js"
 
-export default function EditPage({$target, initialState, onEditing}) {
+export default function EditPage({
+	$target,
+	initialState = INITIAL_DOCUMENT,
+	onEditing,
+}) {
 	this.state = initialState
 	const $editpage = document.createElement("section")
 	$editpage.className = "editpage"
@@ -15,11 +19,11 @@ export default function EditPage({$target, initialState, onEditing}) {
 		onEditing,
 	})
 
-	this.setState = async (nextState) => {
-		if (nextState) {
-			const post = await request(`/${nextState}`)
+	this.setState = async (postId) => {
+		if (postId) {
+			const post = await request(`/${postId}`)
 			this.state = post
-			editor.setState(this.state || INITIAL_DOCUMENT)
+			editor.setState(post || INITIAL_DOCUMENT)
 		} else {
 			this.state = null
 			editor.setState(INITIAL_DOCUMENT)

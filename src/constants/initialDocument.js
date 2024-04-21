@@ -1,6 +1,4 @@
-export const INITIAL_DOCUMENT = () => {
-	return {
-		title: "",
-		content: "",
-	}
+export const INITIAL_DOCUMENT = {
+	title: "",
+	content: "",
 }
