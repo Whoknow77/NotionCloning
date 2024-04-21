@@ -1,4 +1,4 @@
-export default function SidebarHeader({ $target, createDocument, goHome }) {
+export default function SidebarHeader({$target, createDocument, goHome}) {
 	const $sidebarHeader = document.createElement("div")
 	$sidebarHeader.className = "sidebar__header"
 
@@ -8,7 +8,7 @@ export default function SidebarHeader({ $target, createDocument, goHome }) {
         <button class="sidebar__header__title">
             훈오의 Notion
         </button>
-        <button class="sidebar__header__create-button">
+        <button class="icon-button sidebar__header__create-button">
           <img class="create-button__img" src="/src/img/add.svg" alt="페이지 생성 이미지" />
         </button>
     `

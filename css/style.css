@@ -17,9 +17,23 @@
 #app .home__title {
 	font-size: 30px;
 }
+
+#app .icon-button {
+	padding: 0;
+	border: none;
+	min-width: 20px;
+	background: none;
+	height: 25px;
+	img {
+		width: 100%;
+		height: 100%;
+	}
+}
+
 #app button :hover {
 	background-color: rgba(55, 53, 47, 0.08);
 }
+
 #app .sidebar {
 	position: fixed;
 	top: 0;
@@ -49,15 +63,6 @@
 	background: rgba(0, 0, 0, 0.04);
 }
 
-#app .sidebar__header__create-button {
-	width: 25px;
-	height: 25px;
-}
-#app .sidebar__header__create-button .create-button__img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
 #app .sidebar__content {
 	padding-right: 5px;
 }
