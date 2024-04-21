@@ -10,7 +10,6 @@ export default function SidebarList({
 	const $sidebartitle = document.createElement("div")
 	$sidebartitle.className = "sidebar__content"
 	$target.appendChild($sidebartitle)
-
 	const renderTree = (documents) => `
   <ul>
     ${documents
@@ -20,7 +19,7 @@ export default function SidebarList({
           <div class="document__item__main">
             <button class="toggle">
               ${
-								doc.documents && doc.documents.length > 0
+								doc.documents
 									? `<img src="/src/img/open.svg" alt="페이지 토글 열기 이미지"/>`
 									: `<img src="/src/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
 							}
@@ -36,11 +35,7 @@ export default function SidebarList({
               <img src="/src/img/add.svg" alt="페이지 추가 이미지" />
             </button>
           </div>
-          ${
-						doc.documents && doc.documents.length > 0
-							? renderTree(doc.documents)
-							: ""
-					}
+          ${doc.documents && renderTree(doc.documents)}
         </li>
       `
 			)
@@ -48,38 +43,27 @@ export default function SidebarList({
   </ul>
 `
 
-	$sidebartitle.addEventListener("click", (e) => {
-		const $button = e.target.closest("button")
-		const $li = e.target.closest("li")
-		// 버튼 선택
-		if ($li && $button && $button.className) {
-			const {id} = $li.dataset
-			switch ($button.className) {
-				case "toggle":
-					if ($li.querySelector("ul")) {
-						const $ul = $li.querySelector("ul")
-						$ul.classList.toggle("hidden")
-
-						if ($ul.className === "hidden") {
-							$button.innerHTML = `<img src="/src/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
-						} else {
-							$button.innerHTML = `<img src="/src/img/open.svg" alt="페이지 토글 열기 이미지"/>`
-						}
-					}
-					break
-				case "delete":
-					delDocument(id)
-					break
-				case "add":
-					addDocument(id)
-					break
-				default:
-					break
+	$sidebartitle.addEventListener("click", ({target}) => {
+		const $button = target.closest("button")
+		const $li = target.closest("li")
+		const {id} = $li.dataset
+		if ($button) {
+			if ($button.classList.contains("toggle")) {
+				const $child = $li.querySelector("ul")
+				$child.classList.toggle("hidden")
+				if ($child.classList.contains("hidden")) {
+					$button.innerHTML = `<img src="/src/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
+				} else {
+					$button.innerHTML = `<img src="/src/img/open.svg" alt="페이지 토글 열기 이미지"/>`
+				}
+			} else if ($button.classList.contains("delete")) {
+				delDocument(id)
+			} else if ($button.classList.contains("add")) {
+				addDocument(id)
+			} else {
+				push(`/posts/${id}`)
 			}
-		}
-		// 문서 클릭
-		else if ($li) {
-			const {id} = $li.dataset
+		} else {
 			push(`/posts/${id}`)
 		}
 	})
