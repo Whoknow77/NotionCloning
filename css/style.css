@@ -64,6 +64,7 @@
 }
 
 #app .sidebar__content {
+	cursor: pointer;
 	padding-right: 5px;
 }
 #app .sidebar__content span {
