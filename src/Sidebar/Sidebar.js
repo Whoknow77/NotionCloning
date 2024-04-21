@@ -52,6 +52,7 @@ export default function Sidebar({ $target }) {
 			});
 			if (deletedDocuments) {
 				this.setState();
+				push("/");
 			} else {
 				console.log("삭제가 제대로 되지 않았습니다.");
 			}
