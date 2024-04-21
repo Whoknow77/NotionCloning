@@ -46,8 +46,8 @@ export default function SidebarList({
 	$sidebartitle.addEventListener("click", ({target}) => {
 		const $button = target.closest("button")
 		const $li = target.closest("li")
-		const {id} = $li.dataset
 		if ($button) {
+			const {id} = $li.dataset
 			if ($button.classList.contains("toggle")) {
 				const $child = $li.querySelector("ul")
 				$child.classList.toggle("hidden")
@@ -64,7 +64,10 @@ export default function SidebarList({
 				push(`/posts/${id}`)
 			}
 		} else {
-			push(`/posts/${id}`)
+			if ($li) {
+				const {id} = $li.dataset
+				push(`/posts/${id}`)
+			}
 		}
 	})
 
