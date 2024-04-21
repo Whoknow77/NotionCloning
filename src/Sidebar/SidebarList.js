@@ -1,4 +1,4 @@
-import { push } from "../router/router.js"
+import {push} from "../router/router.js"
 
 export default function SidebarList({
 	$target,
@@ -53,7 +53,7 @@ export default function SidebarList({
 		const $li = e.target.closest("li")
 		// 버튼 선택
 		if ($li && $button && $button.className) {
-			const { id } = $li.dataset
+			const {id} = $li.dataset
 			switch ($button.className) {
 				case "toggle":
 					if ($li.querySelector("ul")) {
@@ -79,7 +79,7 @@ export default function SidebarList({
 		}
 		// 문서 클릭
 		else if ($li) {
-			const { id } = $li.dataset
+			const {id} = $li.dataset
 			push(`/posts/${id}`)
 		}
 	})
