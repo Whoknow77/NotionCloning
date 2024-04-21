@@ -2,12 +2,15 @@ import Sidebar from "./Sidebar/Sidebar.js";
 import EditPage from "./Edit/EditPage.js";
 import { initRouter } from "./router/router.js";
 import { request } from "./api/api.js";
+import Home from "./Home/Home.js";
 
 export default function App({ $target }) {
 	const document = {
 		title: "",
 		content: "",
 	};
+
+	const home = new Home({ $target, initialState: true });
 
 	const sidebar = new Sidebar({
 		$target,
@@ -30,8 +33,10 @@ export default function App({ $target }) {
 		if (pathname.indexOf(`/posts/`) === 0) {
 			const [, , postId] = pathname.split("/");
 			editpage.setState(`${postId}`);
+			home.setState(false);
 		} else {
 			// 에디터 페이지 가리기
+			home.setState(true);
 			editpage.setState(null);
 		}
 	};
