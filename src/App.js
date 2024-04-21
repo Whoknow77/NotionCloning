@@ -1,23 +1,19 @@
 import Sidebar from "./Sidebar/Sidebar.js"
 import EditPage from "./Edit/EditPage.js"
-import { initRouter } from "./router/router.js"
-import { request } from "./api/api.js"
+import {initRouter} from "./router/router.js"
+import {request} from "./api/api.js"
 import Home from "./Home/Home.js"
+import {INITIAL_DOCUMENT} from "./constants/initialDocument.js"
 
-export default function App({ $target }) {
-	const document = {
-		title: "",
-		content: "",
-	}
-
-	const home = new Home({ $target, initialState: true })
+export default function App({$target}) {
+	const home = new Home({$target, initialState: true})
 
 	const sidebar = new Sidebar({
 		$target,
 	})
 	const editpage = new EditPage({
 		$target,
-		initialState: document,
+		initialState: INITIAL_DOCUMENT,
 		onEditing: async (document) => {
 			await request(`/${document.id}`, {
 				method: "PUT",
@@ -28,7 +24,7 @@ export default function App({ $target }) {
 	})
 
 	this.render = async () => {
-		const { pathname } = window.location
+		const {pathname} = window.location
 		sidebar.setState()
 		if (pathname.indexOf(`/posts/`) === 0) {
 			const [, , postId] = pathname.split("/")

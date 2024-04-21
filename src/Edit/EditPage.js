@@ -1,15 +1,16 @@
 // EditPage.js
 import Editor from "./Editor.js"
-import { request } from "../api/api.js"
+import {request} from "../api/api.js"
+import {INITIAL_DOCUMENT} from "../constants/initialDocument.js"
 
-export default function EditPage({ $target, initialState, onEditing }) {
+export default function EditPage({$target, initialState, onEditing}) {
 	this.state = initialState
-	const $page = document.createElement("section")
-	$page.className = "editpage"
-	$target.appendChild($page)
+	const $editpage = document.createElement("section")
+	$editpage.className = "editpage"
+	$target.appendChild($editpage)
 
 	const editor = new Editor({
-		$target: $page,
+		$target: $editpage,
 		initialState: this.state,
 		onEditing,
 	})
@@ -18,29 +19,20 @@ export default function EditPage({ $target, initialState, onEditing }) {
 		if (nextState) {
 			const post = await request(`/${nextState}`)
 			this.state = post
-			editor.setState(
-				this.state || {
-					title: "",
-					content: "",
-				}
-			)
+			editor.setState(this.state || INITIAL_DOCUMENT)
 		} else {
 			this.state = null
-			editor.setState({
-				title: "",
-				content: "",
-			})
+			editor.setState(INITIAL_DOCUMENT)
 		}
 
 		this.render()
 	}
 
-	this.render = async () => {
-		// 루트 페이지에서는 에디터 페이지 가리기
+	this.render = () => {
 		if (this.state && this.state.id) {
-			$page.style.display = "flex"
+			$editpage.style.display = "block"
 		} else {
-			$page.style.display = "none"
+			$editpage.style.display = "none"
 		}
 	}
 	this.render()

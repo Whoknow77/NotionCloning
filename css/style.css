@@ -106,16 +106,14 @@
 	padding-left: 5px;
 }
 #app .editpage {
-	width: 100%;
+	width: 70%;
+	margin-left: 300px;
 	margin-top: 150px;
-	justify-content: center;
 }
 #app .editpage .editor {
-	margin-left: 270px;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	width: 900px;
 	height: 100%;
 }
 #app .editpage .editor input {

@@ -1,11 +1,9 @@
-import { debounce } from "../utils/debounce.js"
+import {INITIAL_DOCUMENT} from "../constants/initialDocument.js"
+import {debounce} from "../utils/debounce.js"
 
 export default function Editor({
 	$target,
-	initialState = {
-		title: "",
-		content: "",
-	},
+	initialState = INITIAL_DOCUMENT,
 	onEditing,
 }) {
 	const $editor = document.createElement("div")
