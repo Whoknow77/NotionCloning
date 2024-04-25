@@ -1,10 +1,10 @@
-export default function Home({ $target, initialState }) {
+export default function Home({$target, initialState}) {
 	this.state = initialState
 	const $home = document.createElement("div")
 	$home.className = "home"
 	$target.appendChild($home)
 
-	this.setState = async (nextState) => {
+	this.setState = (nextState) => {
 		this.state = nextState
 		this.render()
 	}

@@ -7,6 +7,27 @@
 	display: flex;
 }
 
+#app .error-page {
+	display: flex;
+	gap: 100px;
+	flex-direction: column;
+	transform: translate(-50%, -50%);
+	position: fixed;
+	top: 50%;
+	left: 60%;
+}
+
+#app .error__text {
+	font-size: 40px;
+}
+
+#app .error__button {
+	font-size: 30px;
+	&:hover {
+		opacity: 0.5;
+	}
+}
+
 #app .home {
 	transform: translate(-50%, -50%);
 	position: fixed;
