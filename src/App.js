@@ -40,6 +40,7 @@ export default function App({$target}) {
 		} else {
 			error.setState(true)
 			home.setState(false)
+			editpage.setState(null)
 		}
 	}
 
