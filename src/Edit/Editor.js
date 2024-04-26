@@ -1,3 +1,4 @@
+import {request} from "../api/api.js"
 import {INITIAL_DOCUMENT} from "../constants/initialDocument.js"
 import {debounce} from "../utils/debounce.js"
 
@@ -11,6 +12,21 @@ export default function Editor({
 	$editor.innerHTML = `
 	<input type="text" name="title" placeholder="제목을 입력해주세요."/>
 	<textarea name="content" class="content"></textarea>
+	<section class="sub-document">
+	하위 문서목록
+	</section>
+  `
+
+	const renderSubDocuemnts = (documents) => `
+  <ul>
+  ${documents
+		.map(
+			(doc) => `<li data-id="${doc.id}" class="sub-document__item">
+  <button>${doc.title}</button>
+  </li>`
+		)
+		.join("")}
+  </ul>
   `
 
 	const $title = $editor.querySelector("[name=title]")
@@ -18,12 +34,19 @@ export default function Editor({
 	this.state = initialState
 	$target.appendChild($editor)
 
-	this.setState = async (nextState) => {
+	this.setState = (nextState) => {
 		this.state = nextState
 		this.render()
 	}
 
-	this.render = () => {
+	this.render = async () => {
+		const {pathname} = window.location
+		const [, , postId] = pathname.split("/")
+		const subDocuments = await request(`/${postId}`)
+		const $subDocument = $editor.querySelector(".sub-document")
+		$subDocument.innerHTML = renderSubDocuemnts(subDocuments)
+		console.log($subDocument)
+
 		$title.value = this.state.title === "새 폴더" ? "" : this.state.title
 		$content.value = this.state.content
 	}
