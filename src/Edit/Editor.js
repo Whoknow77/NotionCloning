@@ -15,8 +15,8 @@ export default function Editor({
 	<input type="text" name="title" placeholder="제목을 입력해주세요."/>
 	<textarea name="content" class="content"></textarea>
 	<section class="sub-document">
-	하위 문서목록
-	<ul class="sub-document__list">
+		<text class="sub-document__title">하위 문서목록</text>
+		<ul class="sub-document__list">
 	</ul>
 	</section>
   `
