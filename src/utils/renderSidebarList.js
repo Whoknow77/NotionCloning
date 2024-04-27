@@ -1,16 +1,16 @@
 export const renderSidebarList = (documents) => `
 <ul>
   ${documents
-		.map(
-			(doc) => `
+    .map(
+      (doc) => `
       <li data-id="${doc.id}" class="document__item">
         <div class="document__item__main">
           <button class="icon-button toggle">
             ${
-							doc.documents
-								? `<img src="/src/img/open.svg" alt="페이지 토글 열기 이미지"/>`
-								: `<img src="/src/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
-						}
+              doc.documents
+                ? `<img src="/src/img/open.svg" alt="페이지 토글 열기 이미지"/>`
+                : `<img src="/src/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
+            }
           </button>
           <button class="icon-button doc">
             <img src="/src/img/doc.svg" alt="페이지 이미지" />
@@ -25,8 +25,8 @@ export const renderSidebarList = (documents) => `
         </div>
         ${doc.documents && renderSidebarList(doc.documents)}
       </li>
-    `
-		)
-		.join("")}
+    `,
+    )
+    .join("")}
 </ul>
 `
