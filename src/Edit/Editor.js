@@ -1,6 +1,8 @@
 import {request} from "../api/api.js"
 import {INITIAL_DOCUMENT} from "../constants/initialDocument.js"
+import {push} from "../router/router.js"
 import {debounce} from "../utils/debounce.js"
+import {renderSubDocuments} from "../utils/renderSubDocuments.js"
 
 export default function Editor({
 	$target,
@@ -14,23 +16,14 @@ export default function Editor({
 	<textarea name="content" class="content"></textarea>
 	<section class="sub-document">
 	하위 문서목록
+	<ul class="sub-document__list">
+	</ul>
 	</section>
-  `
-
-	const renderSubDocuemnts = (documents) => `
-  <ul>
-  ${documents
-		.map(
-			(doc) => `<li data-id="${doc.id}" class="sub-document__item">
-  <button>${doc.title}</button>
-  </li>`
-		)
-		.join("")}
-  </ul>
   `
 
 	const $title = $editor.querySelector("[name=title]")
 	const $content = $editor.querySelector("[name=content]")
+	const $subDocumentList = $editor.querySelector(".sub-document__list")
 	this.state = initialState
 	$target.appendChild($editor)
 
@@ -42,14 +35,19 @@ export default function Editor({
 	this.render = async () => {
 		const {pathname} = window.location
 		const [, , postId] = pathname.split("/")
-		const subDocuments = await request(`/${postId}`)
-		const $subDocument = $editor.querySelector(".sub-document")
-		$subDocument.innerHTML = renderSubDocuemnts(subDocuments)
-		console.log($subDocument)
-
+		const documents = await request(`/${postId}`)
+		const subDocuments = documents.documents
+		$subDocumentList.innerHTML = renderSubDocuments(subDocuments)
 		$title.value = this.state.title === "새 폴더" ? "" : this.state.title
 		$content.value = this.state.content
 	}
+
+	$subDocumentList.addEventListener("click", (e) => {
+		const {id} = e.target.closest("li").dataset
+		if (id) {
+			push(`/posts/${id}`)
+		}
+	})
 
 	$title.addEventListener("keyup", (e) => {
 		if (e.key === "Enter") {
