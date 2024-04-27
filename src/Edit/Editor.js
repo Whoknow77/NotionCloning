@@ -15,15 +15,12 @@ export default function Editor({
 	<input type="text" name="title" placeholder="제목을 입력해주세요."/>
 	<textarea name="content" class="content"></textarea>
 	<section class="sub-document">
-		<text class="sub-document__title">하위 문서목록</text>
-		<ul class="sub-document__list">
-	</ul>
-	</section>
+</section>
   `
 
 	const $title = $editor.querySelector("[name=title]")
 	const $content = $editor.querySelector("[name=content]")
-	const $subDocumentList = $editor.querySelector(".sub-document__list")
+	const $subDocumentContainer = $editor.querySelector(".sub-document")
 	this.state = initialState
 	$target.appendChild($editor)
 
@@ -37,12 +34,20 @@ export default function Editor({
 		const [, , postId] = pathname.split("/")
 		const documents = await request(`/${postId}`)
 		const subDocuments = documents.documents
-		$subDocumentList.innerHTML = renderSubDocuments(subDocuments)
+		if (subDocuments.length > 0) {
+			$subDocumentContainer.innerHTML = `
+			<text class="sub-document__title">하위 문서목록</text>
+			${renderSubDocuments(subDocuments)}
+			`
+		} else {
+			$subDocumentContainer.innerHTML = ``
+		}
+
 		$title.value = this.state.title === "새 폴더" ? "" : this.state.title
 		$content.value = this.state.content
 	}
 
-	$subDocumentList.addEventListener("click", (e) => {
+	$subDocumentContainer.addEventListener("click", (e) => {
 		const {id} = e.target.closest("li").dataset
 		if (id) {
 			push(`/posts/${id}`)

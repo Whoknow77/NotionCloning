@@ -1,5 +1,5 @@
 export const renderSubDocuments = (documents) => `
-<ul>
+<ul class="sub-document__list">
 ${documents
 	.map(
 		(doc) => `<li data-id="${doc.id}" class="sub-document__item">
@@ -8,5 +8,6 @@ ${doc.documents && renderSubDocuments(doc.documents)}
 </li>`
 	)
 	.join("")}
-</ul>
+	</ul>
+
 `
