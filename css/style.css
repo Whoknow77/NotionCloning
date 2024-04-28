@@ -172,6 +172,9 @@
       ul {
         padding-left: 25px;
       }
+      li {
+        width: fit-content;
+      }
     }
   }
 }

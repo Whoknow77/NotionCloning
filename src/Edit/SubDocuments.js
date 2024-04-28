@@ -24,7 +24,7 @@ export default function SubDocuments({ $target, initialState = null }) {
 
   $subDocumentContainer.addEventListener("click", (e) => {
     const { id } = e.target.closest("li").dataset
-    if (id) {
+    if (id && e.target.tagName === "BUTTON") {
       push(`/posts/${id}`)
     }
   })
