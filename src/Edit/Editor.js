@@ -1,14 +1,12 @@
-import { request } from "../api/api.js"
 import { INITIAL_DOCUMENT } from "../constants/initialDocument.js"
-import { push } from "../router/router.js"
 import { debounce } from "../utils/debounce.js"
-import { renderSubDocuments } from "../utils/renderSubDocuments.js"
 
 export default function Editor({
   $target,
   initialState = INITIAL_DOCUMENT,
   onEditing,
 }) {
+  this.state = initialState
   const $editor = document.createElement("div")
   $editor.className = "editor"
   $editor.innerHTML = `
@@ -17,11 +15,9 @@ export default function Editor({
 	<section class="sub-document">
 </section>
   `
-
   const $title = $editor.querySelector("[name=title]")
   const $content = $editor.querySelector("[name=content]")
-  const $subDocumentContainer = $editor.querySelector(".sub-document")
-  this.state = initialState
+
   $target.appendChild($editor)
 
   this.setState = (nextState) => {
@@ -30,29 +26,9 @@ export default function Editor({
   }
 
   this.render = async () => {
-    const { pathname } = window.location
-    const [, , postId] = pathname.split("/")
-    const documents = await request(`/${postId}`)
-    const subDocuments = documents.documents
-    if (subDocuments.length > 0) {
-      $subDocumentContainer.innerHTML = `
-			<text class="sub-document__title">하위 문서목록</text>
-			${renderSubDocuments(subDocuments)}
-			`
-    } else {
-      $subDocumentContainer.innerHTML = ``
-    }
-
     $title.value = this.state.title === "새 폴더" ? "" : this.state.title
     $content.value = this.state.content
   }
-
-  $subDocumentContainer.addEventListener("click", (e) => {
-    const { id } = e.target.closest("li").dataset
-    if (id) {
-      push(`/posts/${id}`)
-    }
-  })
 
   $title.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {

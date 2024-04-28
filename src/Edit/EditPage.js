@@ -2,6 +2,7 @@
 import Editor from "./Editor.js"
 import { request } from "../api/api.js"
 import { INITIAL_DOCUMENT } from "../constants/initialDocument.js"
+import SubDocuments from "./SubDocuments.js"
 
 export default function EditPage({
   $target,
@@ -19,14 +20,24 @@ export default function EditPage({
     onEditing,
   })
 
+  const subDocuments = new SubDocuments({
+    $target: $editpage,
+    initialState: null,
+  })
+
   this.setState = async (postId) => {
     if (postId) {
+      const { pathname } = window.location
+      const [, , postId] = pathname.split("/")
       const post = await request(`/${postId}`)
+      const subDoc = post.documents
       this.state = post
       editor.setState(post || INITIAL_DOCUMENT)
+      subDocuments.setState(subDoc)
     } else {
       this.state = null
       editor.setState(INITIAL_DOCUMENT)
+      subDocuments.setState(null)
     }
 
     this.render()
