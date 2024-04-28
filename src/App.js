@@ -7,12 +7,13 @@ import { INITIAL_DOCUMENT } from "./constants/initialDocument.js"
 import Error from "./Error/Error.js"
 
 export default function App({ $target }) {
-  const home = new Home({ $target, initialState: true })
+  const home = new Home({ $target, initialState: false })
   const error = new Error({ $target, initialState: false })
 
   const sidebar = new Sidebar({
     $target,
   })
+
   const editpage = new EditPage({
     $target,
     initialState: INITIAL_DOCUMENT,

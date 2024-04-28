@@ -1,7 +1,7 @@
 export default function Error({ $target, initialState = false }) {
   this.state = initialState
-  const $errorContainer = document.createElement("section")
-  $errorContainer.className = "error-page"
+  const $error = document.createElement("section")
+  $error.className = "error"
 
   this.setState = (nextState) => {
     this.state = nextState
@@ -10,22 +10,22 @@ export default function Error({ $target, initialState = false }) {
 
   this.render = () => {
     if (this.state) {
-      $errorContainer.innerHTML = `
+      $error.innerHTML = `
 			<h1 class="error__text">존재하지 않는 페이지 입니다.</h1>
 			<button class="error__button">뒤로가기</button>
 			`
     } else {
-      $errorContainer.innerHTML = ``
+      $error.innerHTML = ``
     }
   }
 
-  $errorContainer.addEventListener("click", (e) => {
+  $error.addEventListener("click", (e) => {
     if (e.target.className === "error__button") {
       history.back()
     }
   })
 
-  $target.appendChild($errorContainer)
+  $target.appendChild($error)
 
   this.render()
 }

@@ -12,9 +12,10 @@
   }
 
   /* error */
-  .error-page {
+  .error {
     display: flex;
     gap: 100px;
+    align-items: center;
     flex-direction: column;
     transform: translate(-50%, -50%);
     position: fixed;
@@ -28,9 +29,15 @@
   }
 
   .error__button {
-    font-size: 30px;
+    background-color: lightcoral;
+    width: 30%;
+    border-radius: 10px;
+    padding: 4px;
+    color: white;
+    font-size: 25px;
     &:hover {
-      opacity: 0.5;
+      opacity: 0.8;
+      color: lightgrey;
     }
   }
 
@@ -41,6 +48,7 @@
     top: 50%;
     left: 60%;
     > .home__title {
+      text-align: center;
       white-space: nowrap;
       font-size: 30px;
     }
