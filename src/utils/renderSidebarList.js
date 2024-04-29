@@ -1,4 +1,5 @@
-export const renderSidebarList = (documents) => `
+export const renderSidebarList = (documents) =>
+  `
 <ul>
   ${documents
     .map(
@@ -23,7 +24,7 @@ export const renderSidebarList = (documents) => `
             <img src="/src/img/add.svg" alt="페이지 추가 이미지" />
           </button>
         </div>
-        ${doc.documents && renderSidebarList(doc.documents)}
+        ${doc.documents ? renderSidebarList(doc.documents) : ""}
       </li>
     `,
     )

@@ -47,7 +47,7 @@ export default function SidebarList({
     $sidebartitle.innerHTML = renderSidebarList(this.state)
   }
 
-  this.setState = async (nextState) => {
+  this.setState = (nextState) => {
     this.state = nextState
     this.render()
   }

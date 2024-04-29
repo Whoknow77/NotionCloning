@@ -12,6 +12,7 @@ export default function App({ $target }) {
 
   const sidebar = new Sidebar({
     $target,
+    initialState: [],
   })
 
   const editpage = new EditPage({
@@ -22,13 +23,15 @@ export default function App({ $target }) {
         method: "PUT",
         body: JSON.stringify(document),
       })
-      sidebar.setState()
+      const documents = await request("")
+      sidebar.setState(documents)
     },
   })
 
   this.render = async () => {
     const { pathname } = window.location
-    sidebar.setState()
+    const documents = await request("")
+    sidebar.setState(documents)
     if (pathname === "/") {
       home.setState(true)
       error.setState(false)
