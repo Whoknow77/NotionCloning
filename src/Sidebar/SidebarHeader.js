@@ -15,10 +15,13 @@ export default function SidebarHeader({ $target, createDocument, goHome }) {
   }
 
   $sidebarHeader.addEventListener("click", (e) => {
-    if (e.target.matches(".create-button__img")) {
-      createDocument()
-    } else {
-      goHome()
+    const targetButton = e.target.closest("button")
+    if (targetButton) {
+      if (targetButton.classList.contains("sidebar__header__create-button")) {
+        createDocument()
+      } else if (targetButton.classList.contains("sidebar__header__title")) {
+        goHome()
+      }
     }
   })
 

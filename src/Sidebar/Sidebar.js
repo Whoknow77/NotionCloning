@@ -54,7 +54,7 @@ export default function Sidebar({ $target }) {
         this.setState()
         push("/")
       } else {
-        console.log("삭제가 제대로 되지 않았습니다.")
+        alert("삭제가 제대로 되지 않았습니다. 천천히 눌러주세요.")
       }
     },
   })

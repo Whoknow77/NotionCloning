@@ -30,17 +30,17 @@ export default function App({ $target }) {
     const { pathname } = window.location
     sidebar.setState()
     if (pathname === "/") {
-      editpage.setState(null)
       home.setState(true)
       error.setState(false)
+      editpage.setState(null)
     } else if (pathname.indexOf(`/posts/`) === 0) {
       const [, , postId] = pathname.split("/")
-      editpage.setState(`${postId}`)
       home.setState(false)
       error.setState(false)
+      editpage.setState(`${postId}`)
     } else {
-      error.setState(true)
       home.setState(false)
+      error.setState(true)
       editpage.setState(null)
     }
   }
@@ -48,6 +48,7 @@ export default function App({ $target }) {
   window.addEventListener("popstate", async () => {
     this.render()
   })
+
   this.render()
   initRouter(() => this.render())
 }
