@@ -13,21 +13,21 @@ export default function SidebarList({
   $target.appendChild($sidebartitle)
 
   $sidebartitle.addEventListener("click", ({ target }) => {
-    const $button = target.closest("button")
+    const $sidebarButton = target.closest("button")
     const $li = target.closest("li")
-    if ($button) {
+    if ($sidebarButton) {
       const { id } = $li.dataset
-      if ($button.classList.contains("toggle")) {
+      if ($sidebarButton.classList.contains("toggle")) {
         const $child = $li.querySelector("ul")
         $child.classList.toggle("hidden")
         if ($child.classList.contains("hidden")) {
-          $button.innerHTML = `<img src="/src/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
+          $sidebarButton.innerHTML = `<img src="/src/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
         } else {
-          $button.innerHTML = `<img src="/src/img/open.svg" alt="페이지 토글 열기 이미지"/>`
+          $sidebarButton.innerHTML = `<img src="/src/img/open.svg" alt="페이지 토글 열기 이미지"/>`
         }
-      } else if ($button.classList.contains("delete")) {
+      } else if ($sidebarButton.classList.contains("delete")) {
         delDocument(id)
-      } else if ($button.classList.contains("add")) {
+      } else if ($sidebarButton.classList.contains("add")) {
         addDocument(id)
       } else {
         push(`/posts/${id}`)
@@ -42,7 +42,6 @@ export default function SidebarList({
 
   this.render = () => {
     const renderedSidebarList = renderSidebarList(this.state)
-
     $sidebartitle.innerHTML = renderedSidebarList
   }
 

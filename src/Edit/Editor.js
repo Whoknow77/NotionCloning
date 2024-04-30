@@ -20,6 +20,25 @@ export default function Editor({
 
   $target.appendChild($editor)
 
+  const handleContent = (e) => {
+    const nextState = {
+      ...this.state,
+      [e.target.name]: e.target.value,
+    }
+    if (e.key === "Enter" && e.target.name === "title") {
+      $content.focus()
+      $content.setSelectionRange(0, 0)
+    }
+    this.setState(nextState)
+    debounce(() => {
+      onEditing(nextState)
+    }, 300)
+  }
+
+  $editor.addEventListener("keyup", (e) => {
+    handleContent(e)
+  })
+
   this.setState = (nextState) => {
     this.state = nextState
     this.render()
@@ -29,35 +48,6 @@ export default function Editor({
     $title.value = this.state.title === "새 폴더" ? "" : this.state.title
     $content.value = this.state.content
   }
-
-  $title.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
-      $content.focus()
-      $content.setSelectionRange(0, 0)
-    } else {
-      const nextState = {
-        ...this.state,
-        title: e.target.value,
-      }
-      this.setState(nextState)
-      onEditing(nextState)
-    }
-  })
-
-  const handleContent = (e) => {
-    const nextState = {
-      ...this.state,
-      content: e.target.value,
-    }
-    this.setState(nextState)
-    debounce(() => {
-      onEditing(nextState)
-    })
-  }
-
-  $content.addEventListener("keyup", (e) => {
-    handleContent(e)
-  })
 
   this.render()
 }

@@ -1,5 +1,5 @@
 let timer
-export const debounce = (callback, delay = 1500) => {
+export const debounce = (callback, delay = 1000) => {
   if (timer) {
     clearTimeout(timer)
   }

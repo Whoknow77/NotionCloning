@@ -2,7 +2,6 @@ import SidebarList from "./SidebarList.js"
 import SidebarHeader from "./SidebarHeader.js"
 import { request } from "../api/api.js"
 import { push } from "../router/router.js"
-import { debounce } from "../utils/debounce.js"
 
 export default function Sidebar({ $target, initialState = [] }) {
   this.state = initialState
@@ -33,7 +32,6 @@ export default function Sidebar({ $target, initialState = [] }) {
 
   const filterDeleteDocuments = (documents, targetId) => {
     return documents.filter((document) => {
-      // 하위 문서가 있는 경우
       if (document.documents.length > 0) {
         return filterDeleteDocuments(document.documents, targetId)
       } else {
@@ -59,6 +57,8 @@ export default function Sidebar({ $target, initialState = [] }) {
 
       if (addedDocuments) {
         push(`/posts/${addedDocuments.id}`)
+      } else {
+        alert("새 문서가 생성되지 않았습니다. 다시 시도해주세요.")
       }
     },
 

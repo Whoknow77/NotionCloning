@@ -10,18 +10,18 @@ export default function EditPage({
   onEditing,
 }) {
   this.state = initialState
-  const $editpage = document.createElement("section")
-  $editpage.className = "editpage"
-  $target.appendChild($editpage)
+  const $edit = document.createElement("section")
+  $edit.className = "edit"
+  $target.appendChild($edit)
 
   const editor = new Editor({
-    $target: $editpage,
+    $target: $edit,
     initialState: this.state,
     onEditing,
   })
 
   const subDocuments = new SubDocuments({
-    $target: $editpage,
+    $target: $edit,
     initialState: null,
   })
 
@@ -35,7 +35,7 @@ export default function EditPage({
       editor.setState(post || INITIAL_DOCUMENT)
       subDocuments.setState(subDoc)
     } else {
-      this.state = null
+      this.state = INITIAL_DOCUMENT
       editor.setState(INITIAL_DOCUMENT)
       subDocuments.setState(null)
     }
@@ -45,9 +45,9 @@ export default function EditPage({
 
   this.render = () => {
     if (this.state && this.state.id) {
-      $editpage.style.display = "block"
+      $edit.style.display = "block"
     } else {
-      $editpage.style.display = "none"
+      $edit.style.display = "none"
     }
   }
   this.render()
