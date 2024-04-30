@@ -104,6 +104,10 @@
       cursor: pointer;
       padding-right: 5px;
       span {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
         cursor: pointer;
       }
       ul {
@@ -156,7 +160,7 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      height: 65%;
+      height: 60%;
 
       input {
         font-size: 35px;
@@ -176,15 +180,34 @@
       }
     }
     > .sub-document {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       > .sub-document__title {
         font-weight: 700;
         font-size: 20px;
       }
       ul {
         padding-left: 25px;
+        display: flex;
+        flex-direction: column;
       }
       li {
-        width: fit-content;
+        width: 90px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        > .sub-document__button {
+          font-weight: 800;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          word-break: break-all;
+          color: beige;
+          background-color: orange;
+          padding: 5px;
+          border-radius: 10px;
+        }
       }
     }
   }

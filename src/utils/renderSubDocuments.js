@@ -5,7 +5,7 @@ ${documents
     (doc) =>
       //html
       `<li data-id="${doc.id}" class="sub-document__item">
-        <button>${doc.title}</button>
+        <button class="sub-document__button">${doc.title}</button>
         ${doc.documents && renderSubDocuments(doc.documents)}
       </li>
       `,
