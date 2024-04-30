@@ -1,5 +1,4 @@
 import { push } from "../router/router.js"
-import { debounce } from "../utils/debounce.js"
 import { renderSidebarList } from "../utils/renderSidebarList.js"
 
 export default function SidebarList({
@@ -27,9 +26,7 @@ export default function SidebarList({
           $button.innerHTML = `<img src="/src/img/open.svg" alt="페이지 토글 열기 이미지"/>`
         }
       } else if ($button.classList.contains("delete")) {
-        debounce(() => {
-          delDocument(id)
-        }, 500)
+        delDocument(id)
       } else if ($button.classList.contains("add")) {
         addDocument(id)
       } else {
@@ -44,7 +41,9 @@ export default function SidebarList({
   })
 
   this.render = () => {
-    $sidebartitle.innerHTML = renderSidebarList(this.state)
+    const renderedSidebarList = renderSidebarList(this.state)
+
+    $sidebartitle.innerHTML = renderedSidebarList
   }
 
   this.setState = (nextState) => {
