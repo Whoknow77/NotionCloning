@@ -3,7 +3,6 @@ export const renderSubDocuments = (documents) => `
 ${documents
   .map(
     (doc) =>
-      //html
       `<li data-id="${doc.id}" class="sub-document__item">
         <button class="sub-document__button">${doc.title}</button>
         ${doc.documents && renderSubDocuments(doc.documents)}

@@ -1,4 +1,3 @@
-// EditPage.js
 import Editor from "./Editor.js"
 import { request } from "../api/api.js"
 import { INITIAL_DOCUMENT } from "../constants/initialDocument.js"
