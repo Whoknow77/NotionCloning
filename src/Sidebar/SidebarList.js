@@ -17,13 +17,12 @@ export default function SidebarList({
     if ($sidebarButton) {
       const { id } = $li.dataset
       if ($sidebarButton.classList.contains("toggle")) {
-        const $child = $li.querySelector("ul")
-        if ($child.classList.contains("hidden")) {
-          $child.classList.toggle("hidden")
+        if ($li.classList.contains("hidden")) {
           $sidebarButton.innerHTML = `<img src="/src/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
         } else {
           $sidebarButton.innerHTML = `<img src="/src/img/open.svg" alt="페이지 토글 열기 이미지"/>`
         }
+        $li.classList.toggle("hidden")
       } else if ($sidebarButton.classList.contains("delete")) {
         delDocument(id)
       } else if ($sidebarButton.classList.contains("add")) {

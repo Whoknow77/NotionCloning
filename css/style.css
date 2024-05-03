@@ -139,8 +139,10 @@
         font-weight: 600;
         padding: 0 0 0 5px;
 
-        > .hidden {
-          display: none;
+        &.hidden {
+          ul {
+            display: none;
+          }
         }
 
         span {
