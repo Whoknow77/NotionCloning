@@ -12,7 +12,7 @@ export default function SubDocuments({ $target, initialState = null }) {
   this.render = async () => {
     if (this.state?.length > 0) {
       $subDocumentContainer.innerHTML = `
-			<text class="sub-document__title">하위 문서목록</text>
+			<text class="sub-document__title">📃하위 문서목록</text>
 			${renderSubDocuments(this.state)}
 			`
     } else {

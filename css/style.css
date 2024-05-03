@@ -203,10 +203,13 @@
           white-space: nowrap;
           text-overflow: ellipsis;
           word-break: break-all;
-          color: beige;
-          background-color: orange;
           padding: 5px;
           border-radius: 10px;
+          &:hover {
+            opacity: 1;
+            color: aliceblue;
+            background-color: gray;
+          }
         }
       }
     }

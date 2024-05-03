@@ -12,6 +12,7 @@ export default function Home({ $target, initialState = false }) {
   this.render = () => {
     if (this.state) {
       $home.innerHTML = `
+      <img src="/src/img/background.png" alt="홈 이미지" />
 			<h1 class="home__title">
 			훈오의 Notion에 오신것을 환영합니다😘
       </br>
