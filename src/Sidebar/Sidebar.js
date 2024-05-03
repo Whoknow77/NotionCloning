@@ -30,6 +30,8 @@ export default function Sidebar({ $target, initialState = [] }) {
     },
   })
 
+  const findTargetDocument = (documents, targetId) => {}
+
   const filterDeleteDocuments = (documents, targetId) => {
     return documents.filter((document) => {
       if (document.documents.length > 0) {

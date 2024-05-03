@@ -11,7 +11,6 @@ export default function SidebarList({
   const $sidebartitle = document.createElement("div")
   $sidebartitle.className = "sidebar__content"
   $target.appendChild($sidebartitle)
-
   $sidebartitle.addEventListener("click", ({ target }) => {
     const $sidebarButton = target.closest("button")
     const $li = target.closest("li")
@@ -19,8 +18,8 @@ export default function SidebarList({
       const { id } = $li.dataset
       if ($sidebarButton.classList.contains("toggle")) {
         const $child = $li.querySelector("ul")
-        $child.classList.toggle("hidden")
         if ($child.classList.contains("hidden")) {
+          $child.classList.toggle("hidden")
           $sidebarButton.innerHTML = `<img src="/src/img/close.svg" alt="페이지 토글 닫기 이미지"/>`
         } else {
           $sidebarButton.innerHTML = `<img src="/src/img/open.svg" alt="페이지 토글 열기 이미지"/>`
@@ -43,6 +42,16 @@ export default function SidebarList({
   this.render = () => {
     const renderedSidebarList = renderSidebarList(this.state)
     $sidebartitle.innerHTML = renderedSidebarList
+    const $sidebarlist = $sidebartitle.querySelectorAll(".document__item")
+    const { pathname } = window.location
+    const [, , postId] = pathname.split("/")
+    const selectedSidebarItem = [...$sidebarlist].filter((sidebaritem) => {
+      const { id } = sidebaritem.dataset
+      return id === postId
+    })[0]
+    selectedSidebarItem
+      ?.getElementsByClassName("document__item__main")[0]
+      .classList.toggle("active")
   }
 
   this.setState = (nextState) => {
